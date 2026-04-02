@@ -9,7 +9,7 @@ Install the following:
 pip install fastapi uvicorn geopy certifi pycountry
 ```
 
-Now run the following:
+Now run the following for Macbook:
 ```
 /Applications/Python\ 3.14/Install\ Certificates.command
 ```
