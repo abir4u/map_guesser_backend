@@ -6,8 +6,9 @@ Make sure you are using Python 3.14 or above
 
 Install the following:
 ```
-pip install fastapi uvicorn geopy certifi pycountry geopandas matplotlib motor
+pip install fastapi uvicorn geopy certifi pycountry geopandas matplotlib motor dnspython
 pip install "pydantic[email]"
+python -m pip install "pymongo[srv]==3.12"
 ```
 
 Now run the following for Macbook:
