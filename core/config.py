@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     # API Metadata
-    PROJECT_NAME: str = "Country Distance API"
+    PROJECT_NAME: str = "Map Guesser"
     VERSION: str = "1.0.0"
     API_V1_STR: str = "/api/v1"
 

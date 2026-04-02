@@ -1,14 +1,13 @@
 from fastapi import FastAPI
-from api.v1.endpoints import geo
+from api.v1.api import api_router
+from core.config import settings
 
-app = FastAPI(title="Geo API", version="1.0.0")
+app = FastAPI(title=settings.PROJECT_NAME, version=settings.VERSION)
 
-# Include the routers
-app.include_router(geo.router, prefix="/api/v1/geo", tags=["Geography"])
-
-# When you add auth later, it's just one line:
-# app.include_router(auth.router, prefix="/api/v1/auth", tags=["Security"])
+# Include the main hub
+app.include_router(api_router, prefix=settings.API_V1_STR)
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    # Use string-based loading for the reload feature to work correctly
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
