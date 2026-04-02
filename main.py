@@ -1,15 +1,20 @@
 from contextlib import asynccontextmanager
 
+import pymongo
 from fastapi import FastAPI
 from motor.motor_asyncio import AsyncIOMotorClient
 from api.v1.api import api_router
 from core.config import settings
 from db.mongodb import db
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     db.client = AsyncIOMotorClient(settings.MONGO_URI)
-    print("Connected to MongoDB")
+    database = db.client[settings.DATABASE_NAME]
+    await database["user"].create_index([("email", pymongo.ASCENDING)], unique=True)
+
+    print(f"Connected to MongoDB: {settings.DATABASE_NAME} -> collection: user")
 
     yield
 
