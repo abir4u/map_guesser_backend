@@ -19,12 +19,12 @@ If you are using another version of Python, then replace 3.14 with your Python v
 
 Run the following command on Terminal from the root folder:
 ```
-python main.py
+python3 -m uvicorn main:app --reload
 ```
 
 Navigate to your browser and search for the following:
 ```
-http://0.0.0.0:8000/docs
+http://127.0.0.1:8000/docs
 ```
 
 Use Swagger to test and play around with the API
