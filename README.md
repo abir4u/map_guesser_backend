@@ -28,3 +28,8 @@ http://127.0.0.1:8000/docs
 ```
 
 Use Swagger to test and play around with the API
+
+## Map Update
+
+If maps outlines change, download the data from the below website:
+https://www.naturalearthdata.com/downloads/110m-cultural-vectors/
