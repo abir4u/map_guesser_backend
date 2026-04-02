@@ -1,10 +1,28 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
+from motor.motor_asyncio import AsyncIOMotorClient
 from api.v1.api import api_router
 from core.config import settings
+from db.mongodb import db
 
-app = FastAPI(title=settings.PROJECT_NAME, version=settings.VERSION)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    db.client = AsyncIOMotorClient(settings.MONGO_URI)
+    print("Connected to MongoDB")
 
-# Include the main hub
+    yield
+
+    db.client.close()
+    print("Disconnected from MongoDB")
+
+
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version=settings.VERSION,
+    lifespan=lifespan
+)
+
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 if __name__ == "__main__":
