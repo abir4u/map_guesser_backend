@@ -2,7 +2,6 @@ import math
 import io
 import pycountry
 import geopandas as gpd
-import geodatasets
 import matplotlib.pyplot as plt
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
@@ -16,8 +15,7 @@ class GeoService:
             timeout=settings.GEO_TIMEOUT
         )
         # Load dataset
-        path = geodatasets.get_path("naturalearth.land")
-        self.world = gpd.read_file(path)
+        self.world = gpd.read_file("data/countries/ne_110m_admin_0_countries.shp")
 
     def get_all_countries(self):
         return sorted([c.name for c in pycountry.countries])
@@ -46,7 +44,9 @@ class GeoService:
 
     def get_country_outline(self, country_name: str):
         # Match by name or 'name_long' for better hit rates
-        country_data = self.world[self.world['name'].str.lower() == country_name.lower()]
+        country_data = self.world[
+            self.world['ADMIN'].str.lower() == country_name.lower()
+            ]
         if country_data.empty:
             return None
 
@@ -72,4 +72,10 @@ class GeoService:
         return directions[round(bearing / 45) % 8]
 
 
-geo_service = GeoService()
+geo_service = None
+
+def get_geo_service():
+    global geo_service
+    if geo_service is None:
+        geo_service = GeoService()
+    return geo_service
