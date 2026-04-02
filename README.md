@@ -8,7 +8,7 @@ Install the following:
 ```
 pip install fastapi uvicorn geopy certifi pycountry geopandas matplotlib motor dnspython
 pip install "pydantic[email]"
-python -m pip install "pymongo[srv]==3.12"
+pip install "pymongo<4.11" "motor>=3.6.0"
 ```
 
 Now run the following for Macbook:
