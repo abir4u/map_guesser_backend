@@ -6,7 +6,7 @@ Make sure you are using Python 3.14 or above
 
 Install the following:
 ```
-pip install fastapi uvicorn geopy certifi pycountry geopandas matplotlib
+pip install fastapi uvicorn geopy certifi pycountry geopandas matplotlib motor
 ```
 
 Now run the following for Macbook:
