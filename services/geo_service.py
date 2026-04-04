@@ -87,5 +87,11 @@ def handle_exception_data_for_outline(country_name: str):
             country_name = "United States of America"
         case "Venezuela, Bolivarian Republic of":
             country_name = "Venezuela"
+        case "Bahamas":
+            country_name = "The Bahamas"
+        case "Brunei Darussalam":
+            country_name = "Brunei"
+        case "Congo":
+            country_name = "Democratic Republic of the Congo"
 
     return country_name
