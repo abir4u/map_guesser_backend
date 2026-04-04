@@ -43,7 +43,7 @@ class GeoService:
         }
 
     def get_country_outline(self, country_name: str):
-        # Match by name or 'name_long' for better hit rates
+        country_name = handle_exception_data_for_outline(country_name)
         country_data = self.world[
             self.world['ADMIN'].str.lower() == country_name.lower()
             ]
@@ -79,3 +79,13 @@ def get_geo_service():
     if geo_service is None:
         geo_service = GeoService()
     return geo_service
+
+def handle_exception_data_for_outline(country_name: str):
+    name = country_name
+    match name:
+        case "United States":
+            country_name = "United States of America"
+        case "Venezuela, Bolivarian Republic of":
+            country_name = "Venezuela"
+
+    return country_name
