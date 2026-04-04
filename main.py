@@ -9,7 +9,7 @@ from db.mongodb import db
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(_: FastAPI):
     db.client = AsyncIOMotorClient(settings.MONGO_URI)
     database = db.client[settings.DATABASE_NAME]
     await database["user"].create_index([("email", pymongo.ASCENDING)], unique=True)
@@ -32,5 +32,4 @@ app.include_router(api_router, prefix=settings.API_V1_STR)
 
 if __name__ == "__main__":
     import uvicorn
-    # Use string-based loading for the reload feature to work correctly
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
