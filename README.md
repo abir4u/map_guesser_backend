@@ -35,3 +35,9 @@ Use Swagger to test and play around with the API
 
 If maps outlines change, download the data from the below website:
 https://www.naturalearthdata.com/downloads/110m-cultural-vectors/
+
+## NGRock Token
+
+```
+ngrok config add-authtoken 3Bpd9BKqQ9kEj5vMhwyyQAe9zUu_4vL7BLD2rCVptuiMJj9DX
+```
