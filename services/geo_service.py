@@ -101,5 +101,13 @@ def handle_exception_data_for_outline(country_name: str):
             country_name = "NEED TO FIND OUT"
         case "Sint Maarten (Dutch part)":
             country_name = "NEED TO FIND OUT"
+        case "French Guiana":
+            country_name = "NEED TO FIND OUT"
+        case "Niue":
+            country_name = "NEED TO FIND OUT"
+        case "Hong Kong":
+            country_name = "NEED TO FIND OUT"
+        case "Dominica":
+            country_name = "NEED TO FIND OUT"
 
     return country_name
