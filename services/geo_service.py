@@ -45,7 +45,7 @@ class GeoService:
     def get_country_outline(self, country_name: str):
         country_name = handle_exception_data_for_outline(country_name)
         country_data = self.world[
-            self.world['ADMIN'].str.lower() == country_name.lower()
+            self.world['NAME'].str.lower() == country_name.lower()
             ]
         if country_data.empty:
             return None
@@ -94,13 +94,13 @@ def handle_exception_data_for_outline(country_name: str):
         case "Congo":
             country_name = "Democratic Republic of the Congo"
         case "American Samoa":
-            country_name = "NEED TO FIND OUT"
+            country_name = "Samoa"
         case "Palau":
             country_name = "NEED TO FIND OUT"
         case "Bahrain":
             country_name = "NEED TO FIND OUT"
         case "Sint Maarten (Dutch part)":
-            country_name = "NEED TO FIND OUT"
+            country_name = "Sint Maarten"
         case "French Guiana":
             country_name = "NEED TO FIND OUT"
         case "Niue":
@@ -111,10 +111,6 @@ def handle_exception_data_for_outline(country_name: str):
             country_name = "NEED TO FIND OUT"
         case "Gibralter":
             country_name = "NEED TO FIND OUT"
-        case "Taiwan, Province of China":
-            country_name = "Taiwan"
-        case "Türkiye":
-            country_name = "Turkey"
         case "Isle of Man":
             country_name = "NEED TO FIND OUT"
         case "Singapore":
