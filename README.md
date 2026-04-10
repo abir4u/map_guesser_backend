@@ -33,8 +33,8 @@ Use Swagger to test and play around with the API
 
 ## Map Update
 
-If maps outlines change, download the data from the below website:
-https://www.naturalearthdata.com/downloads/110m-cultural-vectors/
+If maps outlines change, download the data from [here](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/).
+
 
 ## NGRock Token
 
