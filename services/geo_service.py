@@ -15,7 +15,7 @@ class GeoService:
             timeout=settings.GEO_TIMEOUT
         )
         # Load dataset
-        self.world = gpd.read_file("data/countries/ne_110m_admin_0_countries.shp")
+        self.world = gpd.read_file("data/countries_highres/ne_10m_admin_0_countries.shp")
 
     def get_all_countries(self):
         return sorted([c.name for c in pycountry.countries])
@@ -115,5 +115,9 @@ def handle_exception_data_for_outline(country_name: str):
             country_name = "Taiwan"
         case "Türkiye":
             country_name = "Turkey"
+        case "Isle of Man":
+            country_name = "NEED TO FIND OUT"
+        case "Singapore":
+            country_name = "NEED TO FIND OUT"
 
     return country_name
