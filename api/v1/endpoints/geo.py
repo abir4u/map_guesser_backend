@@ -15,7 +15,12 @@ def get_distance(
 @router.get("/countries")
 async def list_countries():
     geo_service = get_geo_service()
-    return {"countries": geo_service.get_all_countries()}
+    countries = geo_service.list_shp_countries()
+
+    if not countries:
+        raise HTTPException(status_code=500, detail="Could not load countries from shapefile")
+
+    return {"count": len(countries), "countries": countries}
 
 @router.get("/outline/{country_name}", responses={200: {"content": {"image/png": {}}}})
 async def get_outline(country_name: str):

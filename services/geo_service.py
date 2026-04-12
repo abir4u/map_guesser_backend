@@ -17,9 +17,6 @@ class GeoService:
         # Load dataset
         self.world = gpd.read_file("data/countries_highres/ne_10m_admin_0_countries.shp")
 
-    def get_all_countries(self):
-        return sorted([c.name for c in pycountry.countries])
-
     def get_distance_data(self, country_a: str, country_b: str):
         loc_a = self.geolocator.geocode(country_a)
         loc_b = self.geolocator.geocode(country_b)
@@ -43,7 +40,6 @@ class GeoService:
         }
 
     def get_country_outline(self, country_name: str):
-        country_name = handle_exception_data_for_outline(country_name)
         country_data = self.world[
             self.world['NAME'].str.lower() == country_name.lower()
             ]
@@ -71,6 +67,13 @@ class GeoService:
         directions = ["North", "North-East", "East", "South-East", "South", "South-West", "West", "North-West"]
         return directions[round(bearing / 45) % 8]
 
+    def list_shp_countries(self):
+        if self.world is None or self.world.empty:
+            return []
+
+        names = self.world['NAME'].dropna().unique()
+        return sorted([str(name) for name in names])
+
 
 geo_service = None
 
@@ -79,41 +82,3 @@ def get_geo_service():
     if geo_service is None:
         geo_service = GeoService()
     return geo_service
-
-def handle_exception_data_for_outline(country_name: str):
-    name = country_name
-    match name:
-        case "United States":
-            country_name = "United States of America"
-        case "Venezuela, Bolivarian Republic of":
-            country_name = "Venezuela"
-        case "Bahamas":
-            country_name = "The Bahamas"
-        case "Brunei Darussalam":
-            country_name = "Brunei"
-        case "Congo":
-            country_name = "Democratic Republic of the Congo"
-        case "American Samoa":
-            country_name = "Samoa"
-        case "Palau":
-            country_name = "NEED TO FIND OUT"
-        case "Bahrain":
-            country_name = "NEED TO FIND OUT"
-        case "Sint Maarten (Dutch part)":
-            country_name = "Sint Maarten"
-        case "French Guiana":
-            country_name = "NEED TO FIND OUT"
-        case "Niue":
-            country_name = "NEED TO FIND OUT"
-        case "Hong Kong":
-            country_name = "NEED TO FIND OUT"
-        case "Dominica":
-            country_name = "NEED TO FIND OUT"
-        case "Gibralter":
-            country_name = "NEED TO FIND OUT"
-        case "Isle of Man":
-            country_name = "NEED TO FIND OUT"
-        case "Singapore":
-            country_name = "NEED TO FIND OUT"
-
-    return country_name
