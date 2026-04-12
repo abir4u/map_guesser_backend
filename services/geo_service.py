@@ -41,8 +41,30 @@ class GeoService:
 
     def get_country_outline(self, country_name: str):
         country_data = self.world[
-            self.world['NAME_LONG'].str.lower() == country_name.lower()
+            self.world['NAME_EN'].str.lower() == country_name.lower()
             ]
+
+        # KEEP THE BELOW CODE FOR NOW TO TEST IF COUNTRY NAME CAUSES ISSUES
+        # if not country_data.empty:
+        #     # Get the first (and only) row of the filtered data
+        #     row = country_data.iloc[0]
+        #
+        #     # Extract your specific columns
+        #     sovereign = row['SOVEREIGNT']
+        #     admin = row['ADMIN']
+        #     geounit = row['GEOUNIT']
+        #     subunit = row['SUBUNIT']
+        #     name_en = row['NAME_EN']
+        #
+        #     # Print the results
+        #     print(f"Sovereign State: {sovereign}")
+        #     print(f"Administrative:  {admin}")
+        #     print(f"Geographic Unit: {geounit}")
+        #     print(f"Subunit:         {subunit}")
+        #     print(f"English Name:    {name_en}")
+        # else:
+        #     print("Country not found in the dataset.")
+
         if country_data.empty:
             return None
 
@@ -71,7 +93,7 @@ class GeoService:
         if self.world is None or self.world.empty:
             return []
 
-        names = self.world['NAME_LONG'].dropna().unique()
+        names = self.world['NAME_EN'].dropna().unique()
         return sorted([str(name) for name in names])
 
 
