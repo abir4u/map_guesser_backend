@@ -41,7 +41,7 @@ class GeoService:
 
     def get_country_outline(self, country_name: str):
         country_data = self.world[
-            self.world['NAME'].str.lower() == country_name.lower()
+            self.world['NAME_LONG'].str.lower() == country_name.lower()
             ]
         if country_data.empty:
             return None
@@ -71,7 +71,7 @@ class GeoService:
         if self.world is None or self.world.empty:
             return []
 
-        names = self.world['NAME'].dropna().unique()
+        names = self.world['NAME_LONG'].dropna().unique()
         return sorted([str(name) for name in names])
 
 
